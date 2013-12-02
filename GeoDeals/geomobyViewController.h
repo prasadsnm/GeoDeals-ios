@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface geomobyViewController : UIViewController
+@property bool keepMonitoringForAlerts;
 @property (weak, nonatomic) IBOutlet UIButton *btnServiceStart;
 - (IBAction)dealClick:(id)sender;
-@property (weak, nonatomic) IBOutlet UIImageView *testBox;
 
 @end

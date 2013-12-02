@@ -10,6 +10,7 @@
 #import "GM_SDK.h"
 #import "SVProgressHUD.h"
 #import "CustomIOS7AlertView.h"
+#import "geomobyNotificationViewController.h"
 
 @interface geomobyViewController ()
 
@@ -20,7 +21,6 @@
 
 @implementation geomobyViewController {
     bool isDailyNotifEnabled;
-    bool keepMonitoringForAlerts;
     bool useCustomAlert;
 }
 
@@ -40,8 +40,13 @@
         [userDefaults setValue:udid forKey:@"udid"];
     }
     
+    if(_keepMonitoringForAlerts == true) {
+        [_btnServiceStart setTitle:@"Disable Service" forState:UIControlStateNormal];
+        [self keepMonitoringForAlerts];
+    }
+    
     if(_client == nil) {
-        _client = [[GM_SDK alloc] initWithBusinessKey:@"b48134f8b267c10cc8cd767f2f1040b97a013b3c" andUDID:udid andDeviceType:device_type];
+        _client = [[GM_SDK alloc] initWithBusinessKey:@"63fb41b334a8e68522fde8bf59823f077284d5c7" andUDID:udid andDeviceType:device_type];
         
         //good settings for testing and development
         _client.walkingOnly = false;
@@ -91,7 +96,29 @@
         [self showCustomUIAlert ];
     }
     else {
-        //normal behaviour
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification Received" message:[_pending_alert valueForKey:@"title"] delegate:self cancelButtonTitle:@"No Thanks" otherButtonTitles:@"Show Me", nil];
+        [alert show];
+    }
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 1) {
+        _keepMonitoringForAlerts = false;
+        [self performSegueWithIdentifier: @"segueToNotification" sender: self];
+    } else {
+        //do something with Close button
+    }
+    
+    //start monitoring again
+    [self startMonitoringForAlerts];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"segueToNotification"]) {
+        geomobyNotificationViewController *notifView = segue.destinationViewController;
+        notifView.pending_alert = _pending_alert;
     }
 }
 
@@ -137,16 +164,16 @@
 }
 
 -(void) startMonitoringForAlerts {
-    if(keepMonitoringForAlerts == true){
+    if(_keepMonitoringForAlerts == true){
         return;
     } else {
         NSLog(@"Monitoring for alerts");
-        keepMonitoringForAlerts = true;
+        _keepMonitoringForAlerts = true;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             do {
                 _pending_alert = [_client getCurrentAlert];
                 if([_pending_alert valueForKey:@"title"]) {
-                    keepMonitoringForAlerts = false;
+                    _keepMonitoringForAlerts = false;
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self alertUser];
@@ -155,7 +182,7 @@
                 else {
                     sleep(8);
                 }
-            } while(keepMonitoringForAlerts);
+            } while(_keepMonitoringForAlerts);
         });
     }
 }
@@ -163,12 +190,14 @@
 - (IBAction)dealClick:(id)sender {
     NSString *dealBtnText = @"";
     
+    //stop the service
     if(isDailyNotifEnabled) {
         dealBtnText = @"Enable Service";
         [_client stopBackgroundMonitoringOfGeoFences];
-        keepMonitoringForAlerts = false;
+        _keepMonitoringForAlerts = false;
         isDailyNotifEnabled = false;
     } else {
+        //start the service
         dealBtnText = @"Disable Service";
         [_client startBackgroundMonitoringOfGeoFences];
         [self startMonitoringForAlerts];

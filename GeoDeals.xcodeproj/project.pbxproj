@@ -28,6 +28,7 @@
 		B46D7B421845DDE30023221C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7B411845DDE30023221C /* Security.framework */; };
 		B46D7B701845EDC20023221C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B46D7B6F1845EDC20023221C /* SVProgressHUD.m */; };
 		B46D7B731846D0D90023221C /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46D7B721846D0D90023221C /* CustomIOS7AlertView.m */; };
+		B476DA0318486CB600BE706E /* geomobyNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B476DA0218486CB600BE706E /* geomobyNotificationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		B46D7B6F1845EDC20023221C /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B46D7B711846D0D90023221C /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		B46D7B721846D0D90023221C /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		B476DA0118486CB600BE706E /* geomobyNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geomobyNotificationViewController.h; sourceTree = "<group>"; };
+		B476DA0218486CB600BE706E /* geomobyNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = geomobyNotificationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				B46D7B091845D5C90023221C /* geomobyAppDelegate.h */,
 				B46D7B0A1845D5C90023221C /* geomobyAppDelegate.m */,
 				B46D7B0C1845D5C90023221C /* Main.storyboard */,
+				B476DA0118486CB600BE706E /* geomobyNotificationViewController.h */,
+				B476DA0218486CB600BE706E /* geomobyNotificationViewController.m */,
 				B46D7B0F1845D5C90023221C /* geomobyViewController.h */,
 				B46D7B101845D5C90023221C /* geomobyViewController.m */,
 				B46D7B121845D5C90023221C /* Images.xcassets */,
@@ -306,6 +311,7 @@
 				B46D7B701845EDC20023221C /* SVProgressHUD.m in Sources */,
 				B46D7B071845D5C90023221C /* main.m in Sources */,
 				B46D7B731846D0D90023221C /* CustomIOS7AlertView.m in Sources */,
+				B476DA0318486CB600BE706E /* geomobyNotificationViewController.m in Sources */,
 				B46D7B0B1845D5C90023221C /* geomobyAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
