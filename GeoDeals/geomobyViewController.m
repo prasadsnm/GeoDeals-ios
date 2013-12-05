@@ -191,7 +191,7 @@
     NSString *dealBtnText = @"";
     
     //stop the service
-    if(isDailyNotifEnabled) {
+    if(_keepMonitoringForAlerts) {
         dealBtnText = @"Enable Service";
         [_client stopBackgroundMonitoringOfGeoFences];
         _keepMonitoringForAlerts = false;

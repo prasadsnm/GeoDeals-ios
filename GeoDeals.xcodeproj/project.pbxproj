@@ -21,7 +21,6 @@
 		B46D7B1C1845D5C90023221C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7AFE1845D5C90023221C /* UIKit.framework */; };
 		B46D7B241845D5C90023221C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B46D7B221845D5C90023221C /* InfoPlist.strings */; };
 		B46D7B261845D5C90023221C /* GeoDealsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B46D7B251845D5C90023221C /* GeoDealsTests.m */; };
-		B46D7B3A1845DA600023221C /* libGeoMobySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7B351845DA600023221C /* libGeoMobySDK.a */; };
 		B46D7B3C1845DDD50023221C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7B3B1845DDD50023221C /* CoreLocation.framework */; };
 		B46D7B3E1845DDDA0023221C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7B3D1845DDDA0023221C /* CoreMotion.framework */; };
 		B46D7B401845DDDE0023221C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7B3F1845DDDE0023221C /* SystemConfiguration.framework */; };
@@ -29,6 +28,7 @@
 		B46D7B701845EDC20023221C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B46D7B6F1845EDC20023221C /* SVProgressHUD.m */; };
 		B46D7B731846D0D90023221C /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46D7B721846D0D90023221C /* CustomIOS7AlertView.m */; };
 		B476DA0318486CB600BE706E /* geomobyNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B476DA0218486CB600BE706E /* geomobyNotificationViewController.m */; };
+		B493D0DD184EF44A00B558BA /* libGeoMobySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7B351845DA600023221C /* libGeoMobySDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,12 +80,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B493D0DD184EF44A00B558BA /* libGeoMobySDK.a in Frameworks */,
 				B46D7B421845DDE30023221C /* Security.framework in Frameworks */,
 				B46D7B401845DDDE0023221C /* SystemConfiguration.framework in Frameworks */,
 				B46D7B3E1845DDDA0023221C /* CoreMotion.framework in Frameworks */,
 				B46D7B3C1845DDD50023221C /* CoreLocation.framework in Frameworks */,
 				B46D7AFD1845D5C90023221C /* CoreGraphics.framework in Frameworks */,
-				B46D7B3A1845DA600023221C /* libGeoMobySDK.a in Frameworks */,
 				B46D7AFF1845D5C90023221C /* UIKit.framework in Frameworks */,
 				B46D7AFB1845D5C90023221C /* Foundation.framework in Frameworks */,
 			);
@@ -398,6 +398,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 arm64 armv7s i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -431,6 +432,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 arm64 armv7s i386 x86_64";
 			};
 			name = Release;
 		};
@@ -469,6 +471,7 @@
 					/Users/zbdd/Desktop/Development/GeoDeals/GeoDeals,
 					"/Users/zbdd/GeoDeals-ios/GeoDeals",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
