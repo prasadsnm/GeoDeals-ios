@@ -39,14 +39,23 @@
         udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
         [userDefaults setValue:udid forKey:@"udid"];
     }
-    
-    if(_keepMonitoringForAlerts == true) {
-        [_btnServiceStart setTitle:@"Disable Service" forState:UIControlStateNormal];
-        [self keepMonitoringForAlerts];
-    }
-    
+    //test0303 63fb41b334a8e68522fde8bf59823f077284d5c7
     if(_client == nil) {
-        _client = [[GM_SDK alloc] initWithBusinessKey:@"63fb41b334a8e68522fde8bf59823f077284d5c7" andUDID:udid andDeviceType:device_type];
+        //another way to construct the object
+        //_client = [[GM_SDK alloc] initWithBusinessKey:@"18d70812f6515543f1bfc00eff27c550590a1bc8" andUDID:udid andDeviceType:device_type];
+        
+        _client = [[GM_SDK alloc] init];
+        
+        //demo account
+        //_client.business_key = @"18d70812f6515543f1bfc00eff27c550590a1bc8";
+        
+        //demo_ios account
+        _client.business_key = @"39c4a5a4e40c7525190db2c95a74651f6f3199f8";
+        
+        _client.udid = udid;
+        _client.device_type = device_type;
+        
+        [_client setDebugMode:true];
         
         //good settings for testing and development
         _client.walkingOnly = false;
@@ -57,6 +66,14 @@
         [_client updateGeoFences];
         
         isDailyNotifEnabled = false;
+    }
+    
+    if(_keepMonitoringForAlerts == true) {
+        _keepMonitoringForAlerts = false;
+        
+        [_btnServiceStart setTitle:@"Disable Service" forState:UIControlStateNormal];
+        
+        [self startMonitoringForAlerts];
     }
     
     _pending_alert = [[NSDictionary alloc] init];
@@ -73,8 +90,9 @@
 -(void) alertUser {
     
     //optional snooze timer, stops the perodic checking for geofences and location. Helps preserve the battery
-    //[_client setSnoozeTimer:18];
+    [_client setSnoozeTimer:5];
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    //[_client stopBackgroundMonitoringOfGeoFences];
     
     if (localNotif == nil)
         return;
@@ -105,9 +123,12 @@
     
     if (buttonIndex == 1) {
         _keepMonitoringForAlerts = false;
+        [_client setNotificationAsClicked:[_pending_alert valueForKey:@"notification_id"]];
         [self performSegueWithIdentifier: @"segueToNotification" sender: self];
     } else {
         //do something with Close button
+        //[_client startBackgroundMonitoringOfGeoFences];
+        [_client setSnoozeTimer:0];
     }
     
     //start monitoring again

@@ -13,10 +13,13 @@
 @property (assign)  NSString *business_key;
 @property (assign)  NSString *udid;
 @property (assign)  NSString *device_type;
+@property bool debug;
 @property bool walkingOnly;
 @property bool ignoreCharging;
 
-@property (atomic, strong) NSString *businessKey;
+-(void) setDebugMode: (bool) enableDebug;
+
+-(id) init;
 
 //initialise client with all required fields.
 -(id) initWithBusinessKey:(NSString *)business_key andUDID:(NSString *)udid andDeviceType:(NSString *)device_type;
@@ -35,6 +38,9 @@
 
 //Request the background service to halt
 -(void)stopBackgroundMonitoringOfGeoFences;
+
+//Update a received notification to indicate it was clicked
+-(void) setNotificationAsClicked: (NSString *)notification_id;
 
 //Returns current notification, deletes the pending notification from the queue
 -(NSDictionary *) getCurrentAlert;

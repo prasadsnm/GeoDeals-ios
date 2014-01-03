@@ -62,7 +62,7 @@
 		B46D7B231845D5C90023221C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B46D7B251845D5C90023221C /* GeoDealsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoDealsTests.m; sourceTree = "<group>"; };
 		B46D7B351845DA600023221C /* libGeoMobySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGeoMobySDK.a; path = GeoDeals/libGeoMobySDK.a; sourceTree = "<group>"; };
-		B46D7B391845DA600023221C /* GM_SDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GM_SDK.h; sourceTree = "<group>"; };
+		B46D7B391845DA600023221C /* GM_SDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GM_SDK.h; path = GeoDeals/include/GeoMobySDK/GM_SDK.h; sourceTree = "<group>"; };
 		B46D7B3B1845DDD50023221C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B46D7B3D1845DDDA0023221C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		B46D7B3F1845DDDE0023221C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -107,12 +107,7 @@
 		B46D7AEE1845D5C90023221C = {
 			isa = PBXGroup;
 			children = (
-				B46D7B6E1845EDC20023221C /* SVProgressHUD.h */,
-				B46D7B711846D0D90023221C /* CustomIOS7AlertView.h */,
-				B46D7B721846D0D90023221C /* CustomIOS7AlertView.m */,
-				B46D7B6F1845EDC20023221C /* SVProgressHUD.m */,
-				B46D7B351845DA600023221C /* libGeoMobySDK.a */,
-				B46D7B361845DA600023221C /* include */,
+				B48EE73D1851C3BA009ABDE7 /* Supporting Files */,
 				B46D7B001845D5C90023221C /* GeoDeals */,
 				B46D7B1F1845D5C90023221C /* GeoDealsTests */,
 				B46D7AF91845D5C90023221C /* Frameworks */,
@@ -189,21 +184,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B46D7B361845DA600023221C /* include */ = {
+		B48EE73D1851C3BA009ABDE7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B46D7B371845DA600023221C /* GeoMobySDK */,
-			);
-			name = include;
-			path = GeoDeals/include;
-			sourceTree = "<group>";
-		};
-		B46D7B371845DA600023221C /* GeoMobySDK */ = {
-			isa = PBXGroup;
-			children = (
+				B46D7B351845DA600023221C /* libGeoMobySDK.a */,
 				B46D7B391845DA600023221C /* GM_SDK.h */,
+				B46D7B711846D0D90023221C /* CustomIOS7AlertView.h */,
+				B46D7B721846D0D90023221C /* CustomIOS7AlertView.m */,
+				B46D7B6E1845EDC20023221C /* SVProgressHUD.h */,
+				B46D7B6F1845EDC20023221C /* SVProgressHUD.m */,
 			);
-			path = GeoMobySDK;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
