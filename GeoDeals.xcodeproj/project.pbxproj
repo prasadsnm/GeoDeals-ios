@@ -29,6 +29,7 @@
 		B46D7B731846D0D90023221C /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46D7B721846D0D90023221C /* CustomIOS7AlertView.m */; };
 		B476DA0318486CB600BE706E /* geomobyNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B476DA0218486CB600BE706E /* geomobyNotificationViewController.m */; };
 		B493D0DD184EF44A00B558BA /* libGeoMobySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B46D7B351845DA600023221C /* libGeoMobySDK.a */; };
+		B4BF1611187E4A410064B554 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4BF1610187E4A410064B554 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		B46D7B721846D0D90023221C /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
 		B476DA0118486CB600BE706E /* geomobyNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geomobyNotificationViewController.h; sourceTree = "<group>"; };
 		B476DA0218486CB600BE706E /* geomobyNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = geomobyNotificationViewController.m; sourceTree = "<group>"; };
+		B4BF1610187E4A410064B554 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4BF1611187E4A410064B554 /* CoreBluetooth.framework in Frameworks */,
 				B493D0DD184EF44A00B558BA /* libGeoMobySDK.a in Frameworks */,
 				B46D7B421845DDE30023221C /* Security.framework in Frameworks */,
 				B46D7B401845DDDE0023221C /* SystemConfiguration.framework in Frameworks */,
@@ -127,6 +130,7 @@
 		B46D7AF91845D5C90023221C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4BF1610187E4A410064B554 /* CoreBluetooth.framework */,
 				B46D7B411845DDE30023221C /* Security.framework */,
 				B46D7B3F1845DDDE0023221C /* SystemConfiguration.framework */,
 				B46D7B3D1845DDDA0023221C /* CoreMotion.framework */,

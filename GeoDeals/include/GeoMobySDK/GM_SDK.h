@@ -10,9 +10,9 @@
 
 @interface GM_SDK : NSObject
 
-@property (assign)  NSString *business_key;
-@property (assign)  NSString *udid;
-@property (assign)  NSString *device_type;
+@property  NSString *business_key;
+@property  NSString *udid;
+@property  NSString *device_type;
 @property bool debug;
 @property bool walkingOnly;
 @property bool ignoreCharging;
@@ -50,5 +50,14 @@
 
 //Snooze the service, will only wake up for the keep alive every 9minutes
 -(void) setSnoozeTimer:(int) minutes;
+
+//set new tags to to send with each MotionUpdate check. (separate with commas)
+-(void)setTag: (NSString *)new_tag;
+
+//returns the currently stored tags
+-(NSString *)getTags;
+
+//add a single tag onto the tag store. (or more, just include a comma AFTER each new item)
+-(void)addTag:(NSString *)new_tag;
 
 @end

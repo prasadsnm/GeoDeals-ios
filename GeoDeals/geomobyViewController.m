@@ -44,13 +44,14 @@
         //another way to construct the object
         //_client = [[GM_SDK alloc] initWithBusinessKey:@"18d70812f6515543f1bfc00eff27c550590a1bc8" andUDID:udid andDeviceType:device_type];
         
+        [_client setDebugMode:true];
         _client = [[GM_SDK alloc] init];
         
         //demo account
-        //_client.business_key = @"18d70812f6515543f1bfc00eff27c550590a1bc8";
+        _client.business_key = @"18d70812f6515543f1bfc00eff27c550590a1bc8";
         
         //demo_ios account
-        _client.business_key = @"39c4a5a4e40c7525190db2c95a74651f6f3199f8";
+        //_client.business_key = @"39c4a5a4e40c7525190db2c95a74651f6f3199f8";
         
         _client.udid = udid;
         _client.device_type = device_type;
@@ -61,11 +62,15 @@
         _client.walkingOnly = false;
         _client.ignoreCharging = true;
         
+        [_client addTag:@"male"];
+        
         [_client checkIfDeviceIsRegistered];
+         
         //useful to cache the geofences and reduce battery consumption in the long run
         [_client updateGeoFences];
         
         isDailyNotifEnabled = false;
+        
     }
     
     if(_keepMonitoringForAlerts == true) {
