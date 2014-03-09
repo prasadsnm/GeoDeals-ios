@@ -14,7 +14,6 @@
 @property  NSString *udid;
 @property  NSString *device_type;
 @property bool debug;
-@property bool walkingOnly;
 @property bool ignoreCharging;
 
 -(void) setDebugMode: (bool) enableDebug;
@@ -30,26 +29,23 @@
 //How to check if you device was successfully validated
 -(BOOL) isDeviceRegistered;
 
-//Checks if the user is moving over 10 seconds, if so, sends the lat/long against the server
--(void) checkForMotionAndUpdate;
+//Start the GeoMoby service
+-(void) startLocationServices;
 
-//Puts checkForMotion onto a thread running in the background
--(void) startBackgroundMonitoringOfGeoFences;
-
-//Request the background service to halt
--(void)stopBackgroundMonitoringOfGeoFences;
+//Stops the GeoMoby Service
+-(void) stopLocationServices;
 
 //Update a received notification to indicate it was clicked
 -(void) setNotificationAsClicked: (NSString *)notification_id;
+
+//Display alert notification (app in foreground)
+-(void) displayAlert;
 
 //Returns current notification, deletes the pending notification from the queue
 -(NSDictionary *) getCurrentAlert;
 
 //Thread created to check the server for current GeoFences for the given business_key
 -(void) updateGeoFences;
-
-//Snooze the service, will only wake up for the keep alive every 9minutes
--(void) setSnoozeTimer:(int) minutes;
 
 //set new tags to to send with each MotionUpdate check. (separate with commas)
 -(void)setTag: (NSString *)new_tag;

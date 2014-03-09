@@ -250,7 +250,7 @@
 				ORGANIZATIONNAME = GeoMoby;
 				TargetAttributes = {
 					B46D7AF61845D5C90023221C = {
-						DevelopmentTeam = G77WFT798R;
+						DevelopmentTeam = P3J7HDD4K6;
 					};
 					B46D7B171845D5C90023221C = {
 						TestTargetID = B46D7AF61845D5C90023221C;
@@ -440,7 +440,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoDeals/GeoDeals-Prefix.pch";
 				INFOPLIST_FILE = "GeoDeals/GeoDeals-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/zbdd/Desktop/Development/GeoDeals/GeoDeals,
@@ -460,7 +460,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoDeals/GeoDeals-Prefix.pch";
 				INFOPLIST_FILE = "GeoDeals/GeoDeals-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/zbdd/Desktop/Development/GeoDeals/GeoDeals,

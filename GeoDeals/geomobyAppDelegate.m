@@ -7,13 +7,63 @@
 //
 
 #import "geomobyAppDelegate.h"
+#import "geomobyViewController.h"
 
 @implementation geomobyAppDelegate
 
+@synthesize client;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //[application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    [self loadClient];
     // Override point for customization after application launch.
     return YES;
+}
+
+-(void) loadClient {
+    NSString *udid;
+    NSString *device_type = [UIDevice currentDevice].model;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if([userDefaults stringForKey:@"udid"]) {
+        udid = [userDefaults stringForKey:@"udid"];
+    } else {
+        udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
+        [userDefaults setValue:udid forKey:@"udid"];
+    }
+    //test0303 63fb41b334a8e68522fde8bf59823f077284d5c7
+    if(client == nil) {
+        //another way to construct the object
+        //client = [[GM_SDK alloc] initWithBusinessKey:@"18d70812f6515543f1bfc00eff27c550590a1bc8" andUDID:udid andDeviceType:device_type];
+        
+        [client setDebugMode:true];
+        client = [[GM_SDK alloc] init];
+        
+        //demo account
+        client.business_key = @"18d70812f6515543f1bfc00eff27c550590a1bc8";
+        
+        //demo_ios account
+        //client.business_key = @"39c4a5a4e40c7525190db2c95a74651f6f3199f8";
+        
+        client.udid = udid;
+        client.device_type = device_type;
+        
+        [client setDebugMode:true];
+        
+        //good settings for testing and development
+        client.ignoreCharging = true;
+        
+        //for testing tags
+        [client addTag:@"male"];
+        
+        [client checkIfDeviceIsRegistered];
+        
+        //useful to cache the geofences and reduce battery consumption in the long run
+        [client updateGeoFences];
+
+    }
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

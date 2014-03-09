@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GM_SDK.h"
 
 @interface geomobyAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) GM_SDK *client;
 
 @end

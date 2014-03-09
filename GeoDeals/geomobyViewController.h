@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "geomobyAppDelegate.h"
 
-@interface geomobyViewController : UIViewController
+@interface geomobyViewController : UIViewController {
+    geomobyAppDelegate *appDelegate;
+}
 @property bool keepMonitoringForAlerts;
 @property (weak, nonatomic) IBOutlet UIButton *btnServiceStart;
 - (IBAction)dealClick:(id)sender;
+-(void) checkForAlerts;
 
 @end

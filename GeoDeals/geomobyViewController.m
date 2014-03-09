@@ -7,14 +7,13 @@
 //
 
 #import "geomobyViewController.h"
-#import "GM_SDK.h"
 #import "SVProgressHUD.h"
 #import "CustomIOS7AlertView.h"
 #import "geomobyNotificationViewController.h"
 
 @interface geomobyViewController ()
 
-@property (nonatomic, strong) GM_SDK *client;
+
 @property (nonatomic, strong) NSDictionary *pending_alert;
 
 @end
@@ -27,51 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    NSString *udid;
-    NSString *device_type = [UIDevice currentDevice].model;
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    appDelegate = [[UIApplication sharedApplication] delegate];
     
-    if([userDefaults stringForKey:@"udid"]) {
-        udid = [userDefaults stringForKey:@"udid"];
-    } else {
-        udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
-        [userDefaults setValue:udid forKey:@"udid"];
-    }
-    //test0303 63fb41b334a8e68522fde8bf59823f077284d5c7
-    if(_client == nil) {
-        //another way to construct the object
-        //_client = [[GM_SDK alloc] initWithBusinessKey:@"18d70812f6515543f1bfc00eff27c550590a1bc8" andUDID:udid andDeviceType:device_type];
-        
-        [_client setDebugMode:true];
-        _client = [[GM_SDK alloc] init];
-        
-        //demo account
-        _client.business_key = @"18d70812f6515543f1bfc00eff27c550590a1bc8";
-        
-        //demo_ios account
-        //_client.business_key = @"39c4a5a4e40c7525190db2c95a74651f6f3199f8";
-        
-        _client.udid = udid;
-        _client.device_type = device_type;
-        
-        [_client setDebugMode:true];
-        
-        //good settings for testing and development
-        _client.walkingOnly = false;
-        _client.ignoreCharging = true;
-        
-        [_client addTag:@"male"];
-        
-        [_client checkIfDeviceIsRegistered];
-         
-        //useful to cache the geofences and reduce battery consumption in the long run
-        [_client updateGeoFences];
-        
-        isDailyNotifEnabled = false;
-        
-    }
+    isDailyNotifEnabled = false;
     
     if(_keepMonitoringForAlerts == true) {
         _keepMonitoringForAlerts = false;
@@ -93,11 +51,7 @@
 }
 
 -(void) alertUser {
-    
-    //optional snooze timer, stops the perodic checking for geofences and location. Helps preserve the battery
-    [_client setSnoozeTimer:5];
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    //[_client stopBackgroundMonitoringOfGeoFences];
     
     if (localNotif == nil)
         return;
@@ -119,7 +73,7 @@
         [self showCustomUIAlert ];
     }
     else {
-         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification Received" message:[_pending_alert valueForKey:@"title"] delegate:self cancelButtonTitle:@"No Thanks" otherButtonTitles:@"Show Me", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification Received" message:[_pending_alert valueForKey:@"title"] delegate:self cancelButtonTitle:@"No Thanks" otherButtonTitles:@"Show Me", nil];
         [alert show];
     }
 }
@@ -128,16 +82,12 @@
     
     if (buttonIndex == 1) {
         _keepMonitoringForAlerts = false;
-        [_client setNotificationAsClicked:[_pending_alert valueForKey:@"notification_id"]];
+        [appDelegate.client setNotificationAsClicked:[_pending_alert valueForKey:@"notification_id"]];
         [self performSegueWithIdentifier: @"segueToNotification" sender: self];
     } else {
         //do something with Close button
-        //[_client startBackgroundMonitoringOfGeoFences];
-        [_client setSnoozeTimer:0];
+        _keepMonitoringForAlerts = true;
     }
-    
-    //start monitoring again
-    [self startMonitoringForAlerts];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -184,20 +134,22 @@
 
 - (void)customIOS7dialogButtonTouchUpInside: (CustomIOS7AlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
 {
-    [self startMonitoringForAlerts];
+    [self checkForAlerts];
     [alertView close];
     
 }
 
+//When app is in the foreground
 -(void) startMonitoringForAlerts {
-    if(_keepMonitoringForAlerts == true){
+    if(_keepMonitoringForAlerts) {
+        _keepMonitoringForAlerts = false;
         return;
     } else {
-        NSLog(@"Monitoring for alerts");
+        NSLog(@"Monitoring for alerts...");
         _keepMonitoringForAlerts = true;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             do {
-                _pending_alert = [_client getCurrentAlert];
+                _pending_alert = [appDelegate.client getCurrentAlert];
                 if([_pending_alert valueForKey:@"title"]) {
                     _keepMonitoringForAlerts = false;
                     
@@ -206,10 +158,19 @@
                     });
                 }
                 else {
-                    sleep(8);
+                    sleep(5);
                 }
             } while(_keepMonitoringForAlerts);
         });
+        }
+}
+
+-(void) checkForAlerts {
+    
+    NSLog(@"Checking for alerts...");
+    _pending_alert = [appDelegate.client getCurrentAlert];
+    if([_pending_alert valueForKey:@"title"]) {
+            [self alertUser];
     }
 }
 
@@ -219,13 +180,13 @@
     //stop the service
     if(_keepMonitoringForAlerts) {
         dealBtnText = @"Enable Service";
-        [_client stopBackgroundMonitoringOfGeoFences];
+        [appDelegate.client stopLocationServices];
         _keepMonitoringForAlerts = false;
         isDailyNotifEnabled = false;
     } else {
         //start the service
         dealBtnText = @"Disable Service";
-        [_client startBackgroundMonitoringOfGeoFences];
+        [appDelegate.client startLocationServices];
         [self startMonitoringForAlerts];
         isDailyNotifEnabled = true;
         
